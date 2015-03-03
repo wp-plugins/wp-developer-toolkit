@@ -62,6 +62,12 @@ class WPDTPluginPage
       }
       wp_enqueue_style( 'wpdt_admin_style', plugins_url( '../css/admin.css' , __FILE__ ) );
       wp_enqueue_script( 'wpdt_admin_script', plugins_url( '../js/admin.js' , __FILE__ ) );
+      if (isset($_POST["refresh_plugins_form"]) && wp_verify_nonce( $_POST['refresh_plugins_nonce'], 'refresh_plugins'))
+      {
+        $refresh = new WPDTRefresh();
+        $refresh->refresh();
+      }
+
       if (isset($_POST["new_plugin"]) && wp_verify_nonce( $_POST['add_plugin_nonce'], 'add_plugin'))
       {
         $new_plugin = sanitize_text_field($_POST["new_plugin"]);
@@ -130,90 +136,100 @@ class WPDTPluginPage
       ?>
       <div class="wrap">
           <h2>WordPress Developer Toolkit</h2>
-          <h3>Available Shortcodes</h3>
-          <div class="templates">
-      			<div class="templates_shortcode">
-      				<span class="templates_name">[plugin_desc id=?]</span> - <?php _e("Outputs the plugin's description where ? is the id of the plugin below", 'wordpress-developer-toolkit'); ?>
-      			</div>
-            <div class="templates_shortcode">
-      				<span class="templates_name">[plugin_link id=? link=?]</span> - <?php _e("Outputs the link to download the plugin where ? is the id of the plugin below and the text for the link", 'wordpress-developer-toolkit'); ?>
-      			</div>
-            <div class="templates_shortcode">
-      				<span class="templates_name">[plugin_download_count id=?]</span> - <?php _e("Outputs the amount of times the plugin has been downloaded where ? is the id of the plugin below", 'wordpress-developer-toolkit'); ?>
-      			</div>
-            <div class="templates_shortcode">
-      				<span class="templates_name">[plugin_version id=?]</span> - <?php _e("Outputs the version of the plugin where ? is the id of the plugin below", 'wordpress-developer-toolkit'); ?>
-      			</div>
-            <div class="templates_shortcode">
-      				<span class="templates_name">[plugin_rating id=?]</span> - <?php _e("Outputs the average rating of the plugin where ? is the id of the plugin below", 'wordpress-developer-toolkit'); ?>
-      			</div>
-            <div class="templates_shortcode">
-      				<span class="templates_name">[plugin_updated id=?]</span> - <?php _e("Outputs the date of the last time the plugin was updated where ? is the id of the plugin below", 'wordpress-developer-toolkit'); ?>
-      			</div>
-            <?php do_action('wpdt_extra_shortcodes'); ?>
-          </div>
-          <div style="clear:both;"></div>
-          <br />
-          <h3>Your Plugins</h3>
-          <table class="widefat">
-            <thead>
-              <tr>
-                <th><?php _e('ID','wordpress-developer-toolkit'); ?></th>
-                <th><?php _e('Plugin','wordpress-developer-toolkit'); ?></th>
-                <th><?php _e('Average Rating','wordpress-developer-toolkit'); ?></th>
-                <th><?php _e('Downloads','wordpress-developer-toolkit'); ?></th>
-                <th><?php _e('Version','wordpress-developer-toolkit'); ?></th>
-                <th><?php _e('Last Updated','wordpress-developer-toolkit'); ?></th>
-              </tr>
-            </thead>
-            <tbody id="the-list">
-              <?php
-              $alternate = "";
-              foreach($plugin_array as $plugin)
-              {
-                if($alternate) $alternate = "";
-    						else $alternate = " class=\"alternate\"";
-                echo "<tr{$alternate}>";
-                echo "<td>".$plugin["id"]."</td>";
-                echo "<td>";
-                  echo $plugin["name"];
-                  echo "<div class=\"row-actions\">
-      						      <a class='linkOptions linkDelete' onclick=\"jQuery('#want_to_delete_".$plugin["id"]."').show();\" href='#'>".__('Delete', 'wordpress-developer-toolkit')."</a>
-                        <div id='want_to_delete_".$plugin["id"]."' style='display:none;'>
-                          <span class='table_text'>".__('Are you sure?','wordpress-developer-toolkit')."</span> <a href='#' onclick=\"wpdt_delete_plugin(".$plugin["id"].");\">".__('Yes','wordpress-developer-toolkit')."</a> | <a href='#' onclick=\"jQuery('#want_to_delete_".$plugin["id"]."').hide();\">".__('No','wordpress-developer-toolkit')."</a>
-                        </div>
-      						</div>";
-                echo "</td>";
-                echo "<td>".$plugin["average_review"]."</td>";
-                echo "<td>".$plugin["downloads"]."</td>";
-                echo "<td>".$plugin["version"]."</td>";
-                echo "<td>".$plugin["last_updated"]."</td>";
-                echo "</tr>";
-              }
-              ?>
-            </tbody>
-            <tfoot>
-              <tr>
-                <th><?php _e('ID','wordpress-developer-toolkit'); ?></th>
-                <th><?php _e('Plugin','wordpress-developer-toolkit'); ?></th>
-                <th><?php _e('Average Rating','wordpress-developer-toolkit'); ?></th>
-                <th><?php _e('Downloads','wordpress-developer-toolkit'); ?></th>
-                <th><?php _e('Version','wordpress-developer-toolkit'); ?></th>
-                <th><?php _e('Last Updated','wordpress-developer-toolkit'); ?></th>
-              </tr>
-            </tfoot>
-          </table>
-          <form action="" method="post" class="new_plugin_form">
-            <h3><?php _e('Add One Of You Plugins','wordpress-developer-toolkit'); ?></h3>
-            <label class="new_plugin_form_label"><?php _e("Your Plugin's Slug",'wordpress-developer-toolkit'); ?></label>
-            <input type="text" name="new_plugin" class="new_plugin_form_input"/><br />
-            <input type="submit" value="<?php _e('Add My Plugin','wordpress-developer-toolkit'); ?>" class="button-primary new_plugin_form_button"/>
-            <?php wp_nonce_field('add_plugin','add_plugin_nonce'); ?>
-          </form>
-          <form action="" method="post" name="delete_plugin_form" style="display:none;">
-            <input type="hidden" name="delete_plugin" id="delete_plugin" value="" />
-            <?php wp_nonce_field('delete_plugin','delete_plugin_nonce'); ?>
-          </form>
+          <section class="info_section">
+            <h3 class="info_section_title"><?php _e('Available Shortcodes','wordpress-developer-toolkit'); ?></h3>
+            <div class="info_section_content">
+              <div class="templates">
+          			<div class="templates_shortcode">
+          				<span class="templates_name">[plugin_desc id=?]</span> - <?php _e("Outputs the plugin's description where ? is the id of the plugin below", 'wordpress-developer-toolkit'); ?>
+          			</div>
+                <div class="templates_shortcode">
+          				<span class="templates_name">[plugin_link id=? link=?]</span> - <?php _e("Outputs the link to download the plugin where ? is the id of the plugin below and the text for the link", 'wordpress-developer-toolkit'); ?>
+          			</div>
+                <div class="templates_shortcode">
+          				<span class="templates_name">[plugin_download_count id=?]</span> - <?php _e("Outputs the amount of times the plugin has been downloaded where ? is the id of the plugin below", 'wordpress-developer-toolkit'); ?>
+          			</div>
+                <div class="templates_shortcode">
+          				<span class="templates_name">[plugin_version id=?]</span> - <?php _e("Outputs the version of the plugin where ? is the id of the plugin below", 'wordpress-developer-toolkit'); ?>
+          			</div>
+                <div class="templates_shortcode">
+          				<span class="templates_name">[plugin_rating id=?]</span> - <?php _e("Outputs the average rating of the plugin where ? is the id of the plugin below", 'wordpress-developer-toolkit'); ?>
+          			</div>
+                <div class="templates_shortcode">
+          				<span class="templates_name">[plugin_updated id=?]</span> - <?php _e("Outputs the date of the last time the plugin was updated where ? is the id of the plugin below", 'wordpress-developer-toolkit'); ?>
+          			</div>
+                <?php do_action('wpdt_extra_shortcodes'); ?>
+              </div>
+            </div>
+          </section>
+          <section class="info_section">
+            <h3 class="info_section_title"><?php _e('Your Plugins','wordpress-developer-toolkit'); ?><a href="#" onclick="document.refresh_form.submit();" class="add-new-h2">Refresh Now</a></h3>
+            <div class="info_section_content">
+              <form action="" name="refresh_form" method="post">
+                <input type="hidden" name="refresh_plugins_form" value="confirmation" />
+                <?php wp_nonce_field('refresh_plugins','refresh_plugins_nonce'); ?>
+              </form>
+              <table class="widefat">
+                <thead>
+                  <tr>
+                    <th><?php _e('ID','wordpress-developer-toolkit'); ?></th>
+                    <th><?php _e('Plugin','wordpress-developer-toolkit'); ?></th>
+                    <th><?php _e('Average Rating','wordpress-developer-toolkit'); ?></th>
+                    <th><?php _e('Downloads','wordpress-developer-toolkit'); ?></th>
+                    <th><?php _e('Version','wordpress-developer-toolkit'); ?></th>
+                    <th><?php _e('Last Updated','wordpress-developer-toolkit'); ?></th>
+                  </tr>
+                </thead>
+                <tbody id="the-list">
+                  <?php
+                  $alternate = "";
+                  foreach($plugin_array as $plugin)
+                  {
+                    if($alternate) $alternate = "";
+        						else $alternate = " class=\"alternate\"";
+                    echo "<tr{$alternate}>";
+                    echo "<td>".$plugin["id"]."</td>";
+                    echo "<td>";
+                      echo $plugin["name"];
+                      echo "<div class=\"row-actions\">
+          						      <a class='linkOptions linkDelete' onclick=\"jQuery('#want_to_delete_".$plugin["id"]."').show();\" href='#'>".__('Delete', 'wordpress-developer-toolkit')."</a>
+                            <div id='want_to_delete_".$plugin["id"]."' style='display:none;'>
+                              <span class='table_text'>".__('Are you sure?','wordpress-developer-toolkit')."</span> <a href='#' onclick=\"wpdt_delete_plugin(".$plugin["id"].");\">".__('Yes','wordpress-developer-toolkit')."</a> | <a href='#' onclick=\"jQuery('#want_to_delete_".$plugin["id"]."').hide();\">".__('No','wordpress-developer-toolkit')."</a>
+                            </div>
+          						</div>";
+                    echo "</td>";
+                    echo "<td>".$plugin["average_review"]."</td>";
+                    echo "<td>".$plugin["downloads"]."</td>";
+                    echo "<td>".$plugin["version"]."</td>";
+                    echo "<td>".$plugin["last_updated"]."</td>";
+                    echo "</tr>";
+                  }
+                  ?>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th><?php _e('ID','wordpress-developer-toolkit'); ?></th>
+                    <th><?php _e('Plugin','wordpress-developer-toolkit'); ?></th>
+                    <th><?php _e('Average Rating','wordpress-developer-toolkit'); ?></th>
+                    <th><?php _e('Downloads','wordpress-developer-toolkit'); ?></th>
+                    <th><?php _e('Version','wordpress-developer-toolkit'); ?></th>
+                    <th><?php _e('Last Updated','wordpress-developer-toolkit'); ?></th>
+                  </tr>
+                </tfoot>
+              </table>
+              <form action="" method="post" class="new_plugin_form">
+                <h3><?php _e('Add One Of You Plugins','wordpress-developer-toolkit'); ?></h3>
+                <label class="new_plugin_form_label"><?php _e("Your Plugin's Slug",'wordpress-developer-toolkit'); ?></label>
+                <input type="text" name="new_plugin" class="new_plugin_form_input"/><br />
+                <input type="submit" value="<?php _e('Add My Plugin','wordpress-developer-toolkit'); ?>" class="button-primary new_plugin_form_button"/>
+                <?php wp_nonce_field('add_plugin','add_plugin_nonce'); ?>
+              </form>
+              <form action="" method="post" name="delete_plugin_form" style="display:none;">
+                <input type="hidden" name="delete_plugin" id="delete_plugin" value="" />
+                <?php wp_nonce_field('delete_plugin','delete_plugin_nonce'); ?>
+              </form>
+            </div>
+          </section>
       </div>
       <?php
     }

@@ -5,7 +5,7 @@
  * Description:
  * Author: Frank Corso
  * Author URI: http://mylocalwebstop.com
- * Version: 0.1.0
+ * Version: 0.2.0
  * Text Domain: wordpress-developer-toolkit
  * Domain Path: /languages
  *
@@ -16,7 +16,7 @@
  * You understand that you install, operate, and uninstall the plugin at your own discretion and risk.
  *
  * @author Frank Corso
- * @version 0.1.0
+ * @version 0.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -45,7 +45,7 @@ class MLWWPDeveloperToolkit
      * @var string
      * @since 0.1.0
      */
-    public $version = '0.1.0';
+    public $version = '0.2.0';
 
     /**
   	  * Main Construct Function
@@ -77,6 +77,7 @@ class MLWWPDeveloperToolkit
       include("php/wpdt_shortcodes.php");
       include("php/wpdt_update.php");
       include("php/wpdt_cron.php");
+      include("php/wpdt_refresh.php");
 
       $this->cronManager = new WPDTCron();
     }

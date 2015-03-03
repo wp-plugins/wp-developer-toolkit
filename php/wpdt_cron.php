@@ -69,33 +69,8 @@ class WPDTCron
      */
     public function cron()
     {
-      $plugins_list = array();
-      $my_query = new WP_Query( array('post_type' => 'plugin') );
-    	if( $my_query->have_posts() )
-    	{
-    	  while( $my_query->have_posts() )
-    		{
-    	    $my_query->the_post();
-          $plugins_list[] = array(
-            'slug' => get_post_meta( get_the_ID(), 'plugin_slug', true ),
-            'id' => get_the_ID()
-          );
-    	  }
-    	}
-      foreach($plugins_list as $plugin)
-      {
-        $slug = $plugin["slug"];
-        $id = $plugin["id"];
-        $response = wp_remote_get( "http://api.wordpress.org/plugins/info/1.0/$slug" );
-        $plugin_info = unserialize( $response['body'] );
-        $ratings = round(($plugin_info->rating/20), 1);
-        add_post_meta( $id, 'average_review', $ratings );
-        add_post_meta( $id, 'downloads', $plugin_info->downloaded );
-        add_post_meta( $id, 'version', $plugin_info->version );
-        add_post_meta( $id, 'last_updated', $plugin_info->last_updated );
-        add_post_meta( $id, 'description', $plugin_info->sections["description"] );
-        add_post_meta( $id, 'download_link', $plugin_info->download_link );
-      }
+      $refresh = new WPDTRefresh();
+      $refresh->refresh();
     }
 }
 

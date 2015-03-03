@@ -4,7 +4,7 @@ Donate link: http://mylocalwebstop.com/downloads/donation-service-payment/
 Tags: wordpress, developer, plugin, stats, download, rating, review, description
 Requires at least: 3.9.1
 Tested up to: 4.1.1
-Stable tag: 0.1.0
+Stable tag: 0.2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 A plugin for WordPress developers.
@@ -59,13 +59,22 @@ Feel free to create an issue on [GitHub](https://github.com/fpcorso/wordpress-de
 1. Main Plugin Page To Enter Your Plugins
 2. Statistics Page
 3. Example Post With Shortcodes
+4. Graph Comparing Plugin Downloads
 
 == Changelog ==
+
+= 0.2.0 (March 3, 2015) =
+* Added Refresh Now Button [Issue #4](https://github.com/fpcorso/wordpress-developer-toolkit/issues/4)
+* Added Bar Graph Comparing Plugin Downloads [Issue #3](https://github.com/fpcorso/wordpress-developer-toolkit/issues/3)
+* Bug Fix: Fixed Bug Affecting Cron [Issue #5](https://github.com/fpcorso/wordpress-developer-toolkit/issues/5)
 
 = 0.1.0 (February 28, 2015) =
 * Initial Version
 
 == Upgrade Notice ==
+
+= 0.2.0 =
+Upgrade for new refresh now button, new bar graph, and bug fix for cron.
 
 = 0.1.0 =
 Initial Version

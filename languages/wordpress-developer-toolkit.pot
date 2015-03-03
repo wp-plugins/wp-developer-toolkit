@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WordPress Developer Toolkit\n"
 "Report-Msgid-Bugs-To: Frank Corso <frank@mylocalwebstop.com>\n"
-"POT-Creation-Date: 2015-02-27 16:37-0500\n"
+"POT-Creation-Date: 2015-03-02 16:59-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Frank Corso <frank@mylocalwebstop.com>\n"
 "Language-Team: My Local Webstop <support@mylocalwebstop.com>\n"
@@ -23,107 +23,116 @@ msgstr ""
 "X-Generator: Poedit 1.7.3\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: php/wpdt_about_page.php:65
+#: php/wpdt_about_page.php:66
 msgid "Welcome To WordPress Developer Toolkit"
 msgstr ""
 
-#: php/wpdt_about_page.php:66
+#: php/wpdt_about_page.php:67
 msgid "Thank you for updating!"
 msgstr ""
 
-#: php/wpdt_about_page.php:69
+#: php/wpdt_about_page.php:70
 msgid "What's New!"
 msgstr ""
 
-#: php/wpdt_about_page.php:71
+#: php/wpdt_about_page.php:72
 msgid "Changelog"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:60
+#: php/wpdt_plugins_page.php:60 php/wpdt_stats_page.php:60
 msgid "You do not have proper authority to access this page"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:136
+#: php/wpdt_plugins_page.php:140
+msgid "Available Shortcodes"
+msgstr ""
+
+#: php/wpdt_plugins_page.php:144
 msgid "Outputs the plugin's description where ? is the id of the plugin below"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:139
+#: php/wpdt_plugins_page.php:147
 msgid ""
 "Outputs the link to download the plugin where ? is the id of the plugin "
 "below and the text for the link"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:142
+#: php/wpdt_plugins_page.php:150
 msgid ""
 "Outputs the amount of times the plugin has been downloaded where ? is the id "
 "of the plugin below"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:145
+#: php/wpdt_plugins_page.php:153
 msgid "Outputs the version of the plugin where ? is the id of the plugin below"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:148
+#: php/wpdt_plugins_page.php:156
 msgid ""
 "Outputs the average rating of the plugin where ? is the id of the plugin "
 "below"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:151
+#: php/wpdt_plugins_page.php:159
 msgid ""
 "Outputs the date of the last time the plugin was updated where ? is the id "
 "of the plugin below"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:161 php/wpdt_plugins_page.php:197
+#: php/wpdt_plugins_page.php:166
+msgid "Your Plugins"
+msgstr ""
+
+#: php/wpdt_plugins_page.php:175 php/wpdt_plugins_page.php:211
 msgid "ID"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:162 php/wpdt_plugins_page.php:198
+#: php/wpdt_plugins_page.php:176 php/wpdt_plugins_page.php:212
 msgid "Plugin"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:163 php/wpdt_plugins_page.php:199
+#: php/wpdt_plugins_page.php:177 php/wpdt_plugins_page.php:213
+#: php/wpdt_stats_page.php:122
 msgid "Average Rating"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:164 php/wpdt_plugins_page.php:200
+#: php/wpdt_plugins_page.php:178 php/wpdt_plugins_page.php:214
 msgid "Downloads"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:165 php/wpdt_plugins_page.php:201
+#: php/wpdt_plugins_page.php:179 php/wpdt_plugins_page.php:215
 msgid "Version"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:166 php/wpdt_plugins_page.php:202
+#: php/wpdt_plugins_page.php:180 php/wpdt_plugins_page.php:216
 msgid "Last Updated"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:181
+#: php/wpdt_plugins_page.php:195
 msgid "Delete"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:183
+#: php/wpdt_plugins_page.php:197
 msgid "Are you sure?"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:183
+#: php/wpdt_plugins_page.php:197
 msgid "Yes"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:183
+#: php/wpdt_plugins_page.php:197
 msgid "No"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:207
+#: php/wpdt_plugins_page.php:221
 msgid "Add One Of You Plugins"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:208
+#: php/wpdt_plugins_page.php:222
 msgid "Your Plugin's Slug"
 msgstr ""
 
-#: php/wpdt_plugins_page.php:210
+#: php/wpdt_plugins_page.php:224
 msgid "Add My Plugin"
 msgstr ""
 
@@ -135,14 +144,30 @@ msgstr ""
 msgid " out of 5 stars"
 msgstr ""
 
-#: php/wpdt_stats_page.php:92
+#: php/wpdt_stats_page.php:108
 msgid "Your Stats"
 msgstr ""
 
-#: wordpress-developer-toolkit.php:155
+#: php/wpdt_stats_page.php:110
+msgid "Total Plugins"
+msgstr ""
+
+#: php/wpdt_stats_page.php:116
+msgid "Average Downloads"
+msgstr ""
+
+#: php/wpdt_stats_page.php:128
+msgid "Total Downloads"
+msgstr ""
+
+#: php/wpdt_stats_page.php:134
+msgid "Total Plugin Downloads"
+msgstr ""
+
+#: wordpress-developer-toolkit.php:156
 msgid "Stats"
 msgstr ""
 
-#: wordpress-developer-toolkit.php:158 wordpress-developer-toolkit.php:159
+#: wordpress-developer-toolkit.php:159 wordpress-developer-toolkit.php:160
 msgid "WPDT About"
 msgstr ""
