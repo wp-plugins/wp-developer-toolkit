@@ -3,8 +3,8 @@ Contributors: fpcorso
 Donate link: http://mylocalwebstop.com/downloads/donation-service-payment/
 Tags: wordpress, developer, plugin, stats, download, rating, review, description
 Requires at least: 3.9.1
-Tested up to: 4.1.1
-Stable tag: 0.2.0
+Tested up to: 4.2
+Stable tag: 0.2.1
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 A plugin for WordPress developers.
@@ -62,6 +62,8 @@ Feel free to create an issue on [GitHub](https://github.com/fpcorso/wordpress-de
 4. Graph Comparing Plugin Downloads
 
 == Changelog ==
+= 0.2.1 (April 22, 2015)
+* Updated version number to reflect Wordpress 4.2 compatibility 
 
 = 0.2.0 (March 3, 2015) =
 * Added Refresh Now Button [Issue #4](https://github.com/fpcorso/wordpress-developer-toolkit/issues/4)
@@ -72,6 +74,8 @@ Feel free to create an issue on [GitHub](https://github.com/fpcorso/wordpress-de
 * Initial Version
 
 == Upgrade Notice ==
+= 0.2.1 (April 22, 2015)
+Upgrade to ensure compatability with Wordpress 4.2
 
 = 0.2.0 =
 Upgrade for new refresh now button, new bar graph, and bug fix for cron.
